@@ -6,13 +6,29 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   <script src="node_modules/react/umd/react.development.js"></script>
   <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 
 <body>
+  <div style="border: solid 1px black; height: 200px; width: 400px; margin-left:auto; margin-right: auto; margin-bottom: 20px; position:relative">
+    <div style="height:60%;display: flex; align-items:center; justify-content:center; font-size: 48px; font-family:sans-serif">
+        0
+  </div>
+    <div style="height: 40%">
+      <div style="float: left; width:50%; display: flex; align-items:center; justify-content:center;">
+        <button style = "left: 50px;font-size: 24px; width: 140px">
+            Increment
+        </button>
+      </div>
+      <div style="float: left; width:50%; display: flex; align-items:center; justify-content:center;">
+          <button style = "left: 50px;font-size: 24px; width: 140px">
+              Increment
+          </button>
+        </div>
+    </div>
+  </div>
   <div id='anchor'></div>
   <script type="text/babel">
 
@@ -36,7 +52,39 @@
         }
     }
 
+    class Counter extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          count: '0'
+        }
+      }
 
+      render() {
+        return (
+          <div style={{border: solid 1px black, height: 200px, width: 400px, margin-left:auto, margin-right: auto, margin-bottom: 20px, position:relative}}>
+              <div style={{height:60%, display: flex, align-items:center, justify-content:center, font-size: 48px, font-family:sans-serif}}>
+                  0
+            </div>
+              <div style={{height: 40%}}>
+                <div style={{float: left, width:50%, display: flex, align-items:center, justify-content:center}}>
+                  <button style ={{left: 50px, font-size: 24px, width: 140px}}>
+                      Increment
+                  </button>
+                </div>
+                <div style={{float: left, width:50%, display: flex, align-items:center, justify-content:center}}>
+                    <button style ={{left: 50px, font-size: 24px, width: 140px}}>
+                        Increment
+                    </button>
+                  </div>
+              </div>
+            </div>
+        )
+      }
+
+    }
+
+    ReactDOM.render(<Counter />,document.getElementById('anchor'))
   </script>
 
 </body>
