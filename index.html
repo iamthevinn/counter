@@ -25,10 +25,18 @@
           }
         this.incrementCounterElement = this.incrementCounterElement.bind(this);
       }
+
+      incrementCounterElement() {
+        let updatedArray = this.state.counters;
+        let key = this.state.counters.length;
+        updatedArray.push(<Counter key={key}/>)
+        this.setState({counters: updatedArray})
+      }
+
       render() {
         return (
           <div>
-            <button style = {buttonStyle} onClick={() => this.addValueTo(1)} >
+            <button onClick={this.incrementCounterElement} >
             Add Counter
             </button>
             <div>
