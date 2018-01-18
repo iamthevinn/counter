@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>Counters</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="node_modules/react/umd/react.development.js"></script>
   <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
@@ -12,44 +12,31 @@
 </head>
 
 <body>
-  <div style="border: solid 1px black; height: 200px; width: 400px; margin-left:auto; margin-right: auto; margin-bottom: 20px; position:relative">
-    <div style="height:60%;display: flex; align-items:center; justify-content:center; font-size: 48px; font-family:sans-serif">
-        0
-  </div>
-    <div style="height: 40%">
-      <div style="float: left; width:50%; display: flex; align-items:center; justify-content:center;">
-        <button style = "left: 50px;font-size: 24px; width: 140px">
-            Increment
-        </button>
-      </div>
-      <div style="float: left; width:50%; display: flex; align-items:center; justify-content:center;">
-          <button style = "left: 50px;font-size: 24px; width: 140px">
-              Increment
-          </button>
-        </div>
-    </div>
-  </div>
   <div id='anchor'></div>
   <script type="text/babel">
 
+
+
     class App extends React.Component {
-        constructor(props){
-            super(props);
-            this.state = {
-                text: 'Stateful component!'
-            }
-        }
-        render(){
-            return (
-                <div>
-                    <h1>{this.state.text}</h1>
-                    <button
-                        onClick={ () => this.setState({ text: 'State has changed!' }) } >
-                        Click to change state's text value!
-                    </button>
-                </div>
-            )
-        }
+      constructor(props) {
+        super(props);
+          this.state = {
+            counters: []
+          }
+        this.incrementCounterElement = this.incrementCounterElement.bind(this);
+      }
+      render() {
+        return (
+          <div>
+            <button style = {buttonStyle} onClick={() => this.addValueTo(1)} >
+            Add Counter
+            </button>
+            <div>
+              {this.state.counters}
+            </div>
+          </div>
+        )
+      }
     }
 
     class Counter extends React.Component {
@@ -58,22 +45,63 @@
         this.state = {
           count: '0'
         }
+        this.addValueTo = this.addValueTo.bind(this)
       }
 
+      addValueTo(val) {
+          this.setState({count: parseInt(this.state.count) + val})
+        }
+ 
       render() {
+
+        const rectangleStyle = {
+          border: 'solid 1px black',
+          height: '200px',
+          width: '400px',
+          marginLeft:'auto',
+          marginRight: 'auto',
+          marginBottom: '20px',
+          position:'relative'
+        }
+
+        const numberStyle = {
+          height:'60%',
+          display: 'flex',
+          alignItems:'center',
+          justifyContent:'center',
+          fontSize: '48px',
+          fontFamily:'sans-serif'
+        }
+
+        const buttonPositionStyle = {
+          float: 'left',
+          width: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }
+
+        const buttonStyle = {
+          left: '50px',
+          fontSize: '24px',
+          width: '140px'
+          }
+
+
+
         return (
-          <div style={{border: solid 1px black, height: 200px, width: 400px, margin-left:auto, margin-right: auto, margin-bottom: 20px, position:relative}}>
-              <div style={{height:60%, display: flex, align-items:center, justify-content:center, font-size: 48px, font-family:sans-serif}}>
-                  0
+          <div style = {rectangleStyle}>
+              <div style = {numberStyle}>
+                  {this.state.count}
             </div>
-              <div style={{height: 40%}}>
-                <div style={{float: left, width:50%, display: flex, align-items:center, justify-content:center}}>
-                  <button style ={{left: 50px, font-size: 24px, width: 140px}}>
-                      Increment
+              <div style = {{height: '40%'}}>
+                <div style = {buttonPositionStyle}>
+                    <button style = {buttonStyle} onClick={ () => this.addValueTo(-1)} >
+                      Decrement
                   </button>
                 </div>
-                <div style={{float: left, width:50%, display: flex, align-items:center, justify-content:center}}>
-                    <button style ={{left: 50px, font-size: 24px, width: 140px}}>
+                <div style = {buttonPositionStyle}>
+                    <button style = {buttonStyle} onClick={() => this.addValueTo(1)} >
                         Increment
                     </button>
                   </div>
@@ -84,7 +112,7 @@
 
     }
 
-    ReactDOM.render(<Counter />,document.getElementById('anchor'))
+    ReactDOM.render(<App />,document.getElementById('anchor'))
   </script>
 
 </body>
